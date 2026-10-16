@@ -1,0 +1,149 @@
+@import 'tailwindcss';
+
+/*
+ * Palette Cahier Bi : toutes les couleurs passent par des variables CSS
+ * (Tailwind v4 expose chaque token @theme en variable --color-*).
+ */
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-500: #10b981;
+  --color-brand-600: #047857;
+  --color-brand-700: #065f46;
+  --color-brand-800: #064e3b;
+  --color-brand-900: #022c22;
+
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-600: #dc2626;
+  --color-danger-700: #b91c1c;
+  --color-warn-50: #fff7ed;
+  --color-warn-100: #ffedd5;
+  --color-warn-600: #ea580c;
+  --color-warn-700: #c2410c;
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+  --color-ok-50: #f0fdf4;
+  --color-ok-100: #dcfce7;
+  --color-ok-600: #16a34a;
+  --color-ok-700: #15803d;
+
+  /* Couleurs dédiées aux statuts de dette */
+  --color-statut-retard-bg: #fee2e2;
+  --color-statut-retard-fg: #b91c1c;
+  --color-statut-aujourdhui-bg: #ffedd5;
+  --color-statut-aujourdhui-fg: #c2410c;
+  --color-statut-attente-bg: #e0e7ef;
+  --color-statut-attente-fg: #334e68;
+  --color-statut-payee-bg: #dcfce7;
+  --color-statut-payee-fg: #15803d;
+  --color-statut-annulee-bg: #f1f5f9;
+  --color-statut-annulee-fg: #64748b;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink-50 text-ink-900 antialiased;
+  }
+  *,
+  ::before,
+  ::after {
+    @apply border-ink-200;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+  dialog::backdrop {
+    background: rgb(15 23 42 / 0.5);
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-ink-200 bg-white shadow-sm;
+  }
+  .btn {
+    @apply inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply min-h-8 px-3 py-1.5 text-xs;
+  }
+  .btn-primary {
+    @apply bg-brand-600 text-white hover:bg-brand-700;
+  }
+  .btn-secondary {
+    @apply border border-ink-300 bg-white text-ink-700 hover:bg-ink-100;
+  }
+  .btn-danger {
+    @apply bg-danger-600 text-white hover:bg-danger-700;
+  }
+  .btn-ghost {
+    @apply text-ink-600 hover:bg-ink-100;
+  }
+  .input {
+    @apply block w-full rounded-lg border border-ink-300 bg-white px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-brand-600 focus:ring-2 focus:ring-brand-200 focus:outline-none disabled:bg-ink-100;
+  }
+  .input.ng-invalid.ng-touched {
+    @apply border-danger-600;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-700;
+  }
+  .field-error {
+    @apply mt-1 text-xs text-danger-700;
+  }
+  .skeleton {
+    @apply animate-pulse rounded bg-ink-200;
+  }
+  .link {
+    @apply font-medium text-brand-700 underline-offset-2 hover:underline;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.toast-in {
+  animation: toast-in 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

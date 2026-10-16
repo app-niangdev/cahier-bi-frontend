@@ -1,0 +1,8 @@
+[build]
+command = "npx ng build"
+publish = "dist/cahier-bi/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
