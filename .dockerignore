@@ -1,0 +1,6 @@
+.git
+.github
+.angular
+.vscode
+node_modules
+dist
